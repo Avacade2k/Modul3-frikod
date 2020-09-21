@@ -38,9 +38,9 @@
   //Promise
   let currentAnswer;
   let answer = "Yes";
+  let statusMessage;
 
-  async function checkAnswer() {
-    let statusMessage;
+  function promiseFunc() {
     return new Promise((resolve, reject) => {
       if (currentAnswer == answer) {
         resolve("promise resolved");
@@ -50,12 +50,15 @@
     })
       .then((message) => {
         statusMessage = "Your answer is correct, " + message;
-        status.innerText = statusMessage;
       })
       .catch((message) => {
         statusMessage = "Your answer is wrong, " + message;
-        status.innerText = statusMessage;
       });
+  }
+
+  async function checkAnswer() {
+    await promiseFunc();
+    status.innerText = await statusMessage;
   }
 
   document.getElementById("answerA").addEventListener("click", () => {
